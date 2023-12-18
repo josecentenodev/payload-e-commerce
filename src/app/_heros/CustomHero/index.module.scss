@@ -35,7 +35,6 @@
   justify-content: center;
   padding: 15% var(--gutter-h);
   width: 100%;
-  color: var(--color-dark-500);
 
   @include mid-break {
     padding: 10% 30px;
@@ -87,9 +86,4 @@
   & > * {
     margin: calc(var(--base) / 2);
   }
-}
-
-.heroButtonBackground {
-  background-color: var(--color-dark-500);
-  color: var(--color-dark-50);
 }
