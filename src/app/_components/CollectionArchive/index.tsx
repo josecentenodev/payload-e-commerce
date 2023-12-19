@@ -5,6 +5,7 @@ import qs from 'qs'
 
 import type { Product } from '../../../payload/payload-types'
 import type { ArchiveBlockProps } from '../../_blocks/ArchiveBlock/types'
+import { useFilter } from '../../_providers/Filter'
 import { Card } from '../Card'
 import { Gutter } from '../Gutter'
 import { PageRange } from '../PageRange'
@@ -38,8 +39,9 @@ export type Props = {
 }
 
 export const CollectionArchive: React.FC<Props> = props => {
+  const { categoryFilters, sort } = useFilter()
+  console.log('collArc', categoryFilters)
   const {
-    categories: catsFromProps,
     className,
     limit = 10,
     onResultChange,
@@ -49,7 +51,6 @@ export const CollectionArchive: React.FC<Props> = props => {
     relationTo,
     selectedDocs,
     showPageRange,
-    sort = '-createdAt',
   } = props
 
   const [results, setResults] = useState<Result>({
@@ -75,7 +76,7 @@ export const CollectionArchive: React.FC<Props> = props => {
   const isRequesting = useRef(false)
   const [page, setPage] = useState(1)
 
-  const categories = (catsFromProps || []).map(cat => cat.id).join(',')
+  const categories = (categoryFilters || []).map(cat => cat).join(',')
 
   const scrollToRef = useCallback(() => {
     const { current } = scrollRef
